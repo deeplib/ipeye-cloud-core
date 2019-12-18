@@ -39,6 +39,7 @@ var MaxTCPPacketSize = 65535
 //MaxLenPacketChanel Максимальная длинна очереди собщений любой из буферизируемых очередений
 //Требудетпровести тесты памяти что бы понять на что способна камера.
 var MaxLenPacketChanel = 100
+var MaxLenPacketChanelServer = 9000
 
 //Packet стандартная структура данных передаваямая между сервером и клиентом
 type Packet struct {
@@ -72,17 +73,20 @@ type ManufacturerDescriptionStruct struct {
 
 //DeviceDescriptionStruct описание устройства
 type DeviceDescriptionStruct struct {
-	Title        string   `json:"Title,omitempty"`              //Название устройства
-	Type         int      `json:"Type,omitempty"`               //Тип устройства
-	Model        string   `json:"Model,omitempty"`              //Модель устройства
-	SerialNumber string   `json:"SerialNumber,omitempty"`       //Серийный номер устройства
-	MACAdress    string   `json:"MACAdress,omitempty"`          //Апаратный адрес устройства
-	Firmware     string   `json:"Firmware,omitempty,omitempty"` //Версия ПО устройства
-	Version      string   `json:"Version,omitempty,omitempty"`  //Версия устройства
-	Login        string   `json:"Login,omitempty,omitempty"`    //Логин от устройства
-	Password     string   `json:"Password,omitempty"`           //Пароль от устройства
-	Port         string   `json:"Port,omitempty"`               //порт устройства
-	RTSPUri      []string `json:"RTSPUri,omitempty"`            //список потдерживамых потоков
+	Title        string      `json:"Title,omitempty"`              //Название устройства
+	Type         int         `json:"Type,omitempty"`               //Тип устройства
+	Model        string      `json:"Model,omitempty"`              //Модель устройства
+	SerialNumber string      `json:"SerialNumber,omitempty"`       //Серийный номер устройства
+	IPAdress     string      `json:"IPAdress,omitempty"`           //IP адрес устройства
+	IPAdresses   [][2]string `json:"IPAdresses,omitempty"`         //IP адреса устройства
+	MACAdress    string      `json:"MACAdress,omitempty"`          //Апаратный адрес устройства
+	Firmware     string      `json:"Firmware,omitempty,omitempty"` //Версия ПО устройства
+	Version      string      `json:"Version,omitempty,omitempty"`  //Версия устройства
+	Login        string      `json:"Login,omitempty,omitempty"`    //Логин от устройства
+	Password     string      `json:"Password,omitempty"`           //Пароль от устройства
+	PortRTSP     string      `json:"PortRTSP,omitempty"`           //порт rtsp устройства
+	PortHTTP     string      `json:"PortHTTP,omitempty"`           //порт http сервера
+	RTSPUri      []string    `json:"RTSPUri,omitempty"`            //список потдерживамых потоков
 }
 
 //ClientDescriptionStruct строка описания клиента доставки потока
