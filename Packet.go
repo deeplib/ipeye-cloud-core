@@ -1,5 +1,9 @@
 package icc
 
+import (
+	"time"
+)
+
 //Packet описание типов комманд сервера - клиента
 const (
 	PING = iota
@@ -14,6 +18,9 @@ const (
 	STREAM_CREATE
 	STREAM_STOP
 	DATA
+	CRYPT
+	EXEC_QUERY
+	EXEC_RESPONCE
 )
 
 //Protocol описание типов протоколов нужно для серверной части
@@ -38,16 +45,24 @@ var MaxTCPPacketSize = 65535
 
 //MaxLenPacketChanel Максимальная длинна очереди собщений любой из буферизируемых очередений
 //Требудетпровести тесты памяти что бы понять на что способна камера.
-var MaxLenPacketChanel = 100
+var MaxLenPacketChanel = 200
+var PreMaxLenPacketChanel = 20
 var MaxLenPacketChanelServer = 9000
+
+type Options struct {
+	HostPort     string
+	ConnDeadline time.Duration
+	RWDeadline   time.Duration
+}
 
 //Packet стандартная структура данных передаваямая между сервером и клиентом
 type Packet struct {
-	PackageType  int    //Тип пакета данных
-	Payload      []byte //Полезные данные тело пакета
-	TunelUUID    string //Уникальный иденитификатор тунеля
-	TunelOptions string //Опции тунеля
-	TunelError   string //Опции тунеля
+	PackageType    int     //Тип пакета данных
+	Payload        []byte  //Полезные данные тело пакета
+	TunelUUID      string  //Уникальный иденитификатор тунеля
+	TunelOptions   string  //Опции тунеля
+	TunelError     string  //Опции тунеля
+	TunelOptionsV2 Options //опции тунеля
 }
 
 //Register строка регистрации между сервером и клиентом
