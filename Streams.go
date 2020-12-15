@@ -7,7 +7,6 @@ import (
 	"time"
 )
 
-
 //StreamStorage struct
 type StreamStorage struct {
 	socket  net.Conn
