@@ -4,6 +4,7 @@ import (
 	"time"
 )
 
+//update
 //Packet описание типов комманд сервера - клиента
 const (
 	PING = iota
